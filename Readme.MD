@@ -6,8 +6,18 @@ A spare is when the player knocks down all 10 pins in two rolls. The bonus for t
 
 A strike is when the player knocks down all 10 pins on his first roll. The frame is then completed with a single roll. The bonus for that frame is the value of the next two rolls.
 
-In the tenth frame a player who rolls a spare or strike is allowed to roll the extra balls to complete the frame. However no more than three balls can be rolled in tenth frame.
+If the player gets a spare or strike in the last (tenth) frame, the bowler gets to throw one or two more bonus balls, respectively. If the bonus throws knock down all the pins, the process does not repeat: the bonus throws are only used to calculate the score of the final frame.
 
 ## Requirements
 
 Write a function calculating the score for a bowling game.
+
+Example of anotated games. When scoring “X” indicates a strike, “/” indicates a spare:
+
+`0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0` (the worst game possible, 0 points)
+
+`9-0 9-0 9-0 9-0 9-0 9-0 9-0 9-0 9-0 9-0` (20 rolls, 10 pars of 9 and a miss, 90 points)
+
+`5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/-5` (21 rolls, 10 pairs of 5 and spare with and additional roll, 150 points)
+
+`X X X X X X X X X X-X-X` (the perfect game with 2 extra rolls, 300 points)
