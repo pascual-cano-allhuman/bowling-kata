@@ -1,5 +1,9 @@
+import { getBowlingScore } from "../src";
+
 describe("Bowling game tests", () => {
-  test(`Dummy test`, () => {
-    expect(true).toBe(true);
-  });
+	test(`Worst game scores 0 points`, () => {
+		const game = "0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0";
+		const score = getBowlingScore(game);
+		expect(score).toBe(0);
+	});
 });
