@@ -17,10 +17,10 @@ const getFramesPoints = (frames: string[]): number[] => {
 
 const getFramesExtraPoints = (frames: string[]): number[] => {
 	return frames.map((frame, index) => {
-		if (!frame.endsWith("/")) return 0;
 		const nextFrames = frames.slice(index + 1);
 		const nextRolls = getPinsKnockedInNextRolls(nextFrames);
 		if (frame.endsWith("/")) return nextRolls[0];
+		if (frame === "X") return nextRolls[0] + nextRolls[1];
 		else return 0;
 	});
 };

@@ -58,4 +58,16 @@ describe("Games with strikes or spares but not extra rolls", () => {
 		const score = getBowlingScore(game);
 		expect(score).toBe(30);
 	});
+
+	test(`Game with just a strike followed by two single pin rolls scores 14`, () => {
+		const game = "X 1-1 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0";
+		const score = getBowlingScore(game);
+		expect(score).toBe(14);
+	});
+
+	test(`Game with three  strikes start scores 60`, () => {
+		const game = "X X X 0-0 0-0 0-0 0-0 0-0 0-0 0-0";
+		const score = getBowlingScore(game);
+		expect(score).toBe(60);
+	});
 });
