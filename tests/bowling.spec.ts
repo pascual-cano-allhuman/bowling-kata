@@ -12,4 +12,22 @@ describe("Bowling game tests", () => {
 		const score = getBowlingScore(game);
 		expect(score).toBe(1);
 	});
+
+	test(`Game without spares and strikes is correctly managed`, () => {
+		const game = "1-1 1-1 1-1 1-1 1-1 1-1 1-1 1-1 1-1 1-1";
+		const score = getBowlingScore(game);
+		expect(score).toBe(20);
+	});
+
+	test(`Game with a spare is correctly managed`, () => {
+		const game = "1-/ 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0";
+		const score = getBowlingScore(game);
+		expect(score).toBe(10);
+	});
+
+	test(`Game with two spares without extra points is correctly managed`, () => {
+		const game = "1-/ 0-0 0-/ 0-0 0-0 0-0 0-0 0-0 0-0 0-0";
+		const score = getBowlingScore(game);
+		expect(score).toBe(20);
+	});
 });
