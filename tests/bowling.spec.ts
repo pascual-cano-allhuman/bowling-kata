@@ -52,4 +52,10 @@ describe("Games with strikes or spares but not extra rolls", () => {
 		const score = getBowlingScore(game);
 		expect(score).toBe(12);
 	});
+
+	test(`Game with just a spare followed by a strike scores 30`, () => {
+		const game = "0-/ X 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0";
+		const score = getBowlingScore(game);
+		expect(score).toBe(30);
+	});
 });

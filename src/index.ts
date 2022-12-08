@@ -17,7 +17,21 @@ const getFramesPoints = (frames: string[]): number[] => {
 
 const getFramesExtraPoints = (frames: string[]): number[] => {
 	return frames.map((frame, index) => {
-		if (frame.endsWith("/")) return parseInt(frames[index + 1][0]);
+		if (!frame.endsWith("/")) return 0;
+		const nextFrames = frames.slice(index + 1);
+		const nextRolls = getPinsKnockedInNextRolls(nextFrames);
+		if (frame.endsWith("/")) return nextRolls[0];
 		else return 0;
 	});
+};
+
+const getPinsKnockedInNextRolls = (nextFrames: string[]): number[] => {
+	return nextFrames
+		.map(frame => {
+			const rolls = frame.split("-");
+			if (rolls[0] === "X") return [10];
+			else if (rolls[1] === "/") return [parseInt(rolls[0]), 10 - parseInt(rolls[0])];
+			else return rolls.map(roll => parseInt(roll));
+		})
+		.flat();
 };
