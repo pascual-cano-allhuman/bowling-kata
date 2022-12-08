@@ -26,12 +26,12 @@ const getFramesExtraPoints = (frames: string[]): number[] => {
 };
 
 const getPinsKnockedInNextRolls = (nextFrames: string[]): number[] => {
-	return nextFrames
-		.map(frame => {
-			const rolls = frame.split("-");
-			if (rolls[0] === "X") return [10];
-			else if (rolls[1] === "/") return [parseInt(rolls[0]), 10 - parseInt(rolls[0])];
-			else return rolls.map(roll => parseInt(roll));
-		})
-		.flat();
+	return nextFrames.map(getPinsKnockedInFrame).flat();
+};
+
+const getPinsKnockedInFrame = (frame: string): number[] => {
+	const rolls = frame.split("-");
+	if (rolls[0] === "X") return [10];
+	else if (rolls[1] === "/") return [parseInt(rolls[0]), 10 - parseInt(rolls[0])];
+	else return rolls.map(roll => parseInt(roll));
 };
