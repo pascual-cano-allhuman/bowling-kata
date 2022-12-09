@@ -9,8 +9,7 @@ const getRegularPointsFromFrames=(frames: string[]): number => {
 			if (frame.endsWith("/")) return 10;
 			if (frame === "X") return 10;
 
-			const rolls = frame.split("-");
-			const points = rolls.map(roll => parseInt(roll));
+			const points = getPinsKnockedInFrame(frame);
 			return points[0] + points[1];
 		})
 		.reduce((score, points) => score + points, 0);
@@ -21,12 +20,22 @@ const getExtraPointsFromFrames=(frames: string[]): number => {
 	for (let index = 0; index < frames.length; index++) {
 		const frame = frames[index];
 		const nextFrame = frames[index + 1];
-		if (frame.endsWith("/")) {
-			const rolls = nextFrame.split("-");
-			const points = rolls.map(roll => parseInt(roll));
+
+		if (frame.endsWith("/")) {	
+			const points = getPinsKnockedInFrame(nextFrame);
 			score = score + points[0];
 		}
-		
+		if (frame === "X") {
+			const points = getPinsKnockedInFrame(nextFrame);
+			score = score + points[0];
+		}
 	}
 	return score;
 };
+
+const getPinsKnockedInFrame = (frame: string): number[] => {
+	const rolls = frame.split("-");
+	const points = rolls.map(roll => parseInt(roll));
+	return points;
+}
+
