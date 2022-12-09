@@ -25,4 +25,9 @@ describe("Bowling game tests", () => {
 		const score = getBowlingScore("X 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0");
 		expect(score).toBe(10);
 	});
+
+	test.skip(`When you get 1 spare and knock a one pin in next roll score is 12`, () => {
+		const score = getBowlingScore("0-/ 1-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0");
+		expect(score).toBe(12);
+	});
 });
