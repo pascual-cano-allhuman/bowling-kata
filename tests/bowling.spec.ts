@@ -71,3 +71,17 @@ describe("Games with strikes or spares but not extra rolls", () => {
 		expect(score).toBe(60);
 	});
 });
+
+describe("Games with strikes or spares and extra rolls", () => {
+	test(`Game alternating five pins rolls and spares scores 150`, () => {
+		const game = "5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/ 5-/-5";
+		const score = getBowlingScore(game);
+		expect(score).toBe(150);
+	});
+
+	test(`The perferct game scores 300`, () => {
+		const game = "X X X X X X X X X X-X-X";
+		const score = getBowlingScore(game);
+		expect(score).toBe(300);
+	});
+});

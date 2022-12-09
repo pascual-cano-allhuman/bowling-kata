@@ -2,7 +2,8 @@ export const getBowlingScore = (game: string): number => {
 	const frames = game.split(" ");
 	const framesPoints = getFramesPoints(frames);
 	const extraPoints = getFramesExtraPoints(frames);
-	return [...framesPoints, ...extraPoints].reduce((total, framePoints) => total + framePoints, 0);
+	const additionalRollsPoints = getAdditionalRollsPoints(frames);
+	return [...framesPoints, ...extraPoints, ...additionalRollsPoints].reduce((total, framePoints) => total + framePoints, 0);
 };
 
 const getFramesPoints = (frames: string[]): number[] => {
@@ -25,13 +26,20 @@ const getFramesExtraPoints = (frames: string[]): number[] => {
 	});
 };
 
-const getPinsKnockedInNextRolls = (nextFrames: string[]): number[] => {
-	return nextFrames.map(getPinsKnockedInFrame).flat();
+const getAdditionalRollsPoints = (frames: string[]): number[] => {
+	const lastFrame = frames[frames.length - 1];
+	if (!lastFrame.includes("/") && !lastFrame.startsWith("X")) return [];
+	const extraRolls = lastFrame.includes("/") ? lastFrame.replace(/^[0-9]-\/-/, "") : lastFrame.replace(/^X-/, "");
+	return getPinsKnockedInTwoRolls(extraRolls);
 };
 
-const getPinsKnockedInFrame = (frame: string): number[] => {
+const getPinsKnockedInNextRolls = (nextFrames: string[]): number[] => {
+	return nextFrames.map(getPinsKnockedInTwoRolls).flat();
+};
+
+const getPinsKnockedInTwoRolls = (frame: string): number[] => {
 	const rolls = frame.split("-");
-	if (rolls[0] === "X") return [10];
+	if (rolls[0] === "X") return rolls.map(roll => 10);
 	else if (rolls[1] === "/") return [parseInt(rolls[0]), 10 - parseInt(rolls[0])];
 	else return rolls.map(roll => parseInt(roll));
 };
