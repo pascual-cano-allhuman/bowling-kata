@@ -10,4 +10,14 @@ describe("Bowling game tests", () => {
 		const score = getBowlingScore("1-0 1-0 1-0 1-0 1-0 1-0 1-0 1-0 1-0 1-0");
 		expect(score).toBe(10);
 	});
+
+	test(`When you knock 9 pin per frame the score is 90`, () => {
+		const score = getBowlingScore("9-0 9-0 9-0 9-0 9-0 9-0 9-0 9-0 9-0 9-0");
+		expect(score).toBe(90);		
+	});
+
+	test(`When you get 1 spare and other rolls are missed the score is 10`, () => {
+		const score = getBowlingScore("0-/ 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0");
+		expect(score).toBe(10);
+	});
 });
