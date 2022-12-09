@@ -3,6 +3,7 @@ export const getBowlingScore = (game: string): number => {
 	return frames
 		.map(frame => {
 			if(frame.endsWith("/")) return 10;
+			if(frame === "X") return 10;
 
 			const rolls = frame.split("-");
 			const points = rolls.map(roll => parseInt(roll));

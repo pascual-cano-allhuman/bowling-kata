@@ -20,4 +20,9 @@ describe("Bowling game tests", () => {
 		const score = getBowlingScore("0-/ 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0");
 		expect(score).toBe(10);
 	});
+
+	test(`When you get 1 strike and other rolls are missed the score is 10`, () => {
+		const score = getBowlingScore("X 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0 0-0");
+		expect(score).toBe(10);
+	});
 });
